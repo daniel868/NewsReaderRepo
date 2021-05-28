@@ -1,10 +1,10 @@
-package com.SincAlexandruDaniel.newsreader;
+package com.sincalexandrudaniel.newsreader;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.SincAlexandruDaniel.newsreader.ui.main.MainFragment;
+import com.sincalexandrudaniel.newsreader.ui.main.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.SincAlexandruDaniel.newsreader.ui.main;
+package com.sincalexandrudaniel.newsreader.ui.main;
 
 import androidx.lifecycle.ViewModel;
 

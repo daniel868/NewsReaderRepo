@@ -1,4 +1,4 @@
-package com.SincAlexandruDaniel.newsreader;
+package com.sincalexandrudaniel.newsreader;
 
 import android.content.Context;
 
