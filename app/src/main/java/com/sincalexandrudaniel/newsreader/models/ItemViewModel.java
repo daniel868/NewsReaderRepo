@@ -1,11 +1,9 @@
 package com.sincalexandrudaniel.newsreader.models;
 
-import android.view.View;
-
 import androidx.databinding.ObservableField;
-import androidx.lifecycle.ViewModel;
 
 public class ItemViewModel {
+    private static final String TAG = "ItemViewModel";
 
     public final ObservableField<String> titleNewsReader;
     public final ObservableField<String> contentNewsReader;

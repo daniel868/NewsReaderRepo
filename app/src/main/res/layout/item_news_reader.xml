@@ -48,6 +48,7 @@
             android:ellipsize="end"
             app:layout_constraintEnd_toStartOf="@id/item_imageView"
             android:text="@{viewModel.contentNewsReader}"
+            android:layout_marginEnd="10dp"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">NewsReader</string>
+    <string name="results">Received %d results</string>
     <string name="content_string">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.  </string>
+
 </resources>

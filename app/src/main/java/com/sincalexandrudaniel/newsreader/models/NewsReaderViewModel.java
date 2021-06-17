@@ -1,38 +1,1 @@
-package com.sincalexandrudaniel.newsreader.models;
-
-import android.util.Log;
-
-import androidx.databinding.ObservableArrayList;
-import androidx.databinding.ObservableList;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
-import androidx.lifecycle.ViewModel;
-
-public class NewsReaderViewModel extends ViewModel implements LifecycleObserver {
-    private static final String TAG = "NewsReaderViewModel";
-
-    public final ObservableList<ItemViewModel> items;
-
-    public NewsReaderViewModel() {
-        this.items = new ObservableArrayList<>();
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    public void refresh() {
-        Log.d(TAG, "refresh: Called ");
-
-        if (items.isEmpty()) {
-            ItemViewModel itemViewModel = new ItemViewModel();
-            itemViewModel.contentNewsReader.set("TestContent");
-            itemViewModel.titleNewsReader.set("TestTitle");
-            itemViewModel.imageNewsReader.set("https://digipedia.ro/wp-content/uploads/2017/08/ANDROID.png");
-            items.add(itemViewModel);
-            ItemViewModel itemViewModel1 = new ItemViewModel();
-            itemViewModel1.contentNewsReader.set("TestContent1");
-            itemViewModel1.titleNewsReader.set("TestTitle2");
-            itemViewModel1.imageNewsReader.set("https://yt3.ggpht.com/ytc/AAUvwnix1W5yfYHFVUru51TRhdeSyFkMhglTrBp_IYP1qA=s900-c-k-c0x00ffffff-no-rj");
-            items.add(itemViewModel1);
-        }
-    }
-}
+package com.sincalexandrudaniel.newsreader.models;import android.annotation.SuppressLint;import android.app.Application;import android.util.Log;import androidx.annotation.NonNull;import androidx.databinding.ObservableArrayList;import androidx.databinding.ObservableBoolean;import androidx.databinding.ObservableField;import androidx.databinding.ObservableList;import androidx.lifecycle.AndroidViewModel;import androidx.lifecycle.Lifecycle;import androidx.lifecycle.LifecycleObserver;import androidx.lifecycle.OnLifecycleEvent;import com.sincalexandrudaniel.data.NewsRepository;import com.sincalexandrudaniel.newsreader.R;import com.sincalexandrudaniel.newsreader.models.mapers.ArticleToItemViewModelMapper;import com.sincalexandrudaniel.newsreader.reactive.SingleLiveEvent;import java.util.List;import io.reactivex.android.schedulers.AndroidSchedulers;import io.reactivex.disposables.Disposable;public class NewsReaderViewModel extends AndroidViewModel implements LifecycleObserver {    private static final String TAG = "NewsReaderViewModel";    public static final String LINK = "https://newsapi.org/";    private Disposable disposable;    public final ObservableList<ItemViewModel> items;    private final NewsRepository repository;    public final ObservableBoolean isLoading;    private final ObservableField<String> resultText;    private final SingleLiveEvent<Throwable> error;    private final SingleLiveEvent<String> openLink;    public NewsReaderViewModel(Application application, NewsRepository repository) {        super(application);        this.items = new ObservableArrayList<>();        this.repository = repository;        this.isLoading = new ObservableBoolean();        this.resultText = new ObservableField<>();        this.error = new SingleLiveEvent<>();        this.openLink = new SingleLiveEvent<>();    }    @SuppressLint("CheckResult")    @OnLifecycleEvent(Lifecycle.Event.ON_START)    public void refresh() {        Log.d(TAG, "refresh: Called ");        if ((disposable == null || disposable.isDisposed()) && items.isEmpty()){            isLoading.set(true);            disposable = repository.getNewsArticle()                    .map(new ArticleToItemViewModelMapper(getApplication()))                    .observeOn(AndroidSchedulers.mainThread())                    .subscribe(                            this::onNewsArticleReceived,                            this::onNewsArticleError);        }    }    private void onNewsArticleReceived(@NonNull List<ItemViewModel> articles) {        isLoading.set(false);        resultText.set(getApplication().getString(R.string.results, articles.size()));        items.clear();        items.addAll(articles);    }    private void onNewsArticleError(Throwable throwable) {        isLoading.set(false);        error.setValue(throwable);    }    public void onPoweredBySelected() {        openLink.setValue(LINK);    }}
