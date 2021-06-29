@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.sincalexandrudaniel.data.di.RepoModule;
 
-public class DemoApplication extends Application {
+public class NewsReaderApplication extends Application {
     private static RepoModule repoModule;
 
     @Override

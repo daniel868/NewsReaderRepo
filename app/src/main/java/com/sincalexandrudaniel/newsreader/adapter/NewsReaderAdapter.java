@@ -4,11 +4,14 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sincalexandrudaniel.newsreader.databinding.ItemNewsReaderBinding;
-import com.sincalexandrudaniel.newsreader.databinding.ItemNewsReaderBindingImpl;
 import com.sincalexandrudaniel.newsreader.models.ItemViewModel;
+import com.sincalexandrudaniel.newsreader.ui.main.NewsListFragmentDirections;
+
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,6 +36,11 @@ public class NewsReaderAdapter extends RecyclerView.Adapter<NewsReaderAdapter.Ne
     @Override
     public void onBindViewHolder(@NonNull @NotNull NewsViewHolder holder, int position) {
         holder.binding.setViewModel(newsReaderList.get(position));
+        holder.itemView.setOnClickListener(v -> {
+            NavDirections navDirections = NewsListFragmentDirections.actionMainFragmentToItemFragment3(newsReaderList.get(position).titleNewsReader.get());
+            Navigation.findNavController(holder.itemView).navigate(navDirections);
+        });
+
     }
 
     @Override
@@ -45,12 +53,13 @@ public class NewsReaderAdapter extends RecyclerView.Adapter<NewsReaderAdapter.Ne
         notifyDataSetChanged();
     }
 
-    public class NewsViewHolder extends RecyclerView.ViewHolder {
+    public static class NewsViewHolder extends RecyclerView.ViewHolder {
         final ItemNewsReaderBinding binding;
 
         public NewsViewHolder(ItemNewsReaderBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
+
     }
 }

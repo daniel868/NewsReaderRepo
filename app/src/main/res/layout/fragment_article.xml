@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:utils="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="fragmentViewModel"
+            type="com.sincalexandrudaniel.newsreader.models.fragment.FragmentItemViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/fragmentImageView"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="30dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:parseImage="@{fragmentViewModel.fragmentImageUri}"
+            utils:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/fragment_txtViewDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@{fragmentViewModel.fragmentTitle}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragmentImageView"
+            utils:text="some descciption text"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/fragment_txtViewContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@{fragmentViewModel.fragmentContent}"
+            android:ellipsize="end"
+            app:layout_constraintTop_toBottomOf="@id/fragment_txtViewDescription"
+            utils:text="@string/content_string2" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

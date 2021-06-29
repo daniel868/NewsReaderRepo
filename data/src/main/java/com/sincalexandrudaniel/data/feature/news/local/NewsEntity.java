@@ -11,33 +11,18 @@ public class NewsEntity {
     @Nullable
     public Integer id;
 
-    private String newsTitle;
+    public final String newsTitle;
 
-    private String newsContent;
+    public final String newsContent;
 
-    private String newsPhotoUri;
+    public final String newsPhotoUri;
 
-    public String getNewsTitle() {
-        return newsTitle;
-    }
-
-    public void setNewsTitle(String newsTitle) {
+    public NewsEntity(String newsTitle, String newsContent, String newsPhotoUri) {
         this.newsTitle = newsTitle;
-    }
-
-    public String getNewsContent() {
-        return newsContent;
-    }
-
-    public void setNewsContent(String newsContent) {
         this.newsContent = newsContent;
-    }
-
-    public String getNewsPhotoUri() {
-        return newsPhotoUri;
-    }
-
-    public void setNewsPhotoUri(String newsPhotoUri) {
         this.newsPhotoUri = newsPhotoUri;
     }
+
+
+
 }

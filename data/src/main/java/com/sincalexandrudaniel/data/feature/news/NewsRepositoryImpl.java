@@ -3,6 +3,7 @@ package com.sincalexandrudaniel.data.feature.news;
 import android.annotation.SuppressLint;
 
 import com.sincalexandrudaniel.data.NewsRepository;
+import com.sincalexandrudaniel.data.feature.news.local.NewsEntity;
 import com.sincalexandrudaniel.data.feature.news.local.NewsLocalDataStore;
 import com.sincalexandrudaniel.data.feature.news.model.Article;
 import com.sincalexandrudaniel.data.feature.news.remote.NewsRemoteSource;
@@ -12,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
 
 public class NewsRepositoryImpl implements NewsRepository {
     private static final String TAG = "NewsRepositoryImpl";
@@ -35,6 +37,12 @@ public class NewsRepositoryImpl implements NewsRepository {
                 .onErrorResumeNext(localDataStore.fetchDataFromDB());
     }
 
+    @NotNull
+    @Override
+    public Single<NewsEntity> getArticle(String title) {
+        return localDataStore.queryEntityFromDB(title)
+                .subscribeOn(Schedulers.io());
+    }
 
 
 }

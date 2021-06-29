@@ -19,8 +19,8 @@ public interface NewsDao {
     @Query("SELECT * FROM newsTable")
     Single<List<NewsEntity>> fetchDataFromDB();
 
-    @Query("SELECT * FROM newsTable where id=:id")
-    Single<NewsEntity> queryNewsItem(int id);
+    @Query("SELECT * FROM newsTable where newsTitle=:title")
+    Single<NewsEntity> queryNewsItem(String title);
 
     @Query("DELETE FROM newsTable where id=:id")
     Completable deleteNewsItem(int id);

@@ -17,7 +17,7 @@ import io.reactivex.schedulers.Schedulers;
 public class NewsLocalDataStore {
     private static final String TAG = "NewsLocalDataStore";
 
-    private NewsDao newsDao;
+    private final NewsDao newsDao;
 
     public Flowable<List<NewsEntity>> getNewsEntities() {
         return newsDao.queryNewsList();
@@ -40,6 +40,10 @@ public class NewsLocalDataStore {
         return getAllEntities().map(new NewsEntityToArticleMapper());
     }
 
+    public Single<NewsEntity> queryEntityFromDB(String title) {
+        return newsDao.queryNewsItem(title);
+    }
+
     @SuppressLint("CheckResult")
     public void saveArticle(List<Article> articles) {
         Log.d(TAG, "saveArticle into localDataStore: Called");
@@ -48,7 +52,7 @@ public class NewsLocalDataStore {
                 .andThen(
                         Single.just(articles)
                                 .map(new ArticleToNewsEntityMapper())
-                                .flatMapCompletable(entities -> newsDao.insertAllNews(entities))
+                                .flatMapCompletable(newsDao::insertAllNews)
 
                 ).subscribeOn(Schedulers.io())
                 .subscribe(

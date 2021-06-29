@@ -10,13 +10,13 @@ import java.util.List;
 
 import io.reactivex.functions.Function;
 
-public class NewsEntityToArticleMapper implements Function< List<NewsEntity>, List<Article>> {
+public class NewsEntityToArticleMapper implements Function<List<NewsEntity>, List<Article>> {
     @Override
     public List<Article> apply(@NotNull List<NewsEntity> newsEntities) throws Exception {
         List<Article> articleList = new ArrayList<>();
         for (NewsEntity currentEntity : newsEntities) {
-            Article article = new Article(currentEntity.getNewsPhotoUri(), currentEntity.getNewsTitle(),
-                    currentEntity.getNewsContent(), "");
+            Article article = new Article(currentEntity.newsPhotoUri, currentEntity.newsTitle,
+                    currentEntity.newsContent, "");
             articleList.add(article);
         }
         return articleList;

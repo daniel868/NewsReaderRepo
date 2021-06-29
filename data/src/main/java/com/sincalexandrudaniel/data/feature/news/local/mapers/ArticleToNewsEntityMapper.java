@@ -19,10 +19,10 @@ public class ArticleToNewsEntityMapper implements Function<List<Article>, List<N
     public List<NewsEntity> apply(@NotNull List<Article> articles) {
         List<NewsEntity> newsEntities = new ArrayList<>();
         for (Article currentArticle : articles) {
-            NewsEntity entity = new NewsEntity();
-            entity.setNewsContent(!currentArticle.content.equals("") ? currentArticle.content : DEFAULT_CONTENT);
-            entity.setNewsPhotoUri(!currentArticle.imageUrl.equals("") ? currentArticle.imageUrl : DEFAULT_IMAGE_URL);
-            entity.setNewsTitle(!currentArticle.title.equals("") ? currentArticle.title : DEFAULT_TITLE);
+            String newsTitle = !currentArticle.title.equals("") ? currentArticle.title : DEFAULT_TITLE;
+            String newsContent = !currentArticle.content.equals("") ? currentArticle.content : DEFAULT_CONTENT;
+            String newsPhotoUri = !currentArticle.imageUrl.equals("") ? currentArticle.imageUrl : DEFAULT_IMAGE_URL;
+            NewsEntity entity = new NewsEntity(newsTitle, newsContent, newsPhotoUri);
 
             newsEntities.add(entity);
         }

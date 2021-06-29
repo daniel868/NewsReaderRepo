@@ -17,12 +17,12 @@ import com.sincalexandrudaniel.newsreader.models.ViewModelFactory;
 
 import org.jetbrains.annotations.NotNull;
 
-public class MainFragment extends Fragment {
+public class NewsListFragment extends Fragment {
     private static final String TAG = "MainFragment";
     private NewsReaderViewModel viewModel;
 
-    public static MainFragment newInstance() {
-        return new MainFragment();
+    public static NewsListFragment newInstance() {
+        return new NewsListFragment();
     }
 
     @Override

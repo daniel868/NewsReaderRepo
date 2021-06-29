@@ -12,10 +12,9 @@ import java.util.List;
 public class RecyclerBinder {
 
     @BindingAdapter("items")
-    public static void addItems(RecyclerView recyclerView, List<ItemViewModel>itemViewModelList){
+    public static void addItems(RecyclerView recyclerView, List<ItemViewModel> itemViewModelList) {
         NewsReaderAdapter adapter = (NewsReaderAdapter) recyclerView.getAdapter();
-
-        if (adapter==null){
+        if (adapter == null) {
             adapter = new NewsReaderAdapter();
             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
             recyclerView.setAdapter(adapter);
