@@ -22,7 +22,4 @@ public class NewsEntity {
         this.newsContent = newsContent;
         this.newsPhotoUri = newsPhotoUri;
     }
-
-
-
 }

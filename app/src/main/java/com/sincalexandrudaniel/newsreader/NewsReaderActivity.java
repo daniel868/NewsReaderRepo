@@ -22,7 +22,6 @@ public class NewsReaderActivity extends AppCompatActivity {
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         if (navHostFragment != null)
             navController = navHostFragment.getNavController();
-
     }
 
 }

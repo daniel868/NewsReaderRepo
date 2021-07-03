@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
-public class FragmentItemViewModel extends AndroidViewModel implements LifecycleObserver {
+public class ReadArticleViewModel extends AndroidViewModel implements LifecycleObserver {
 
 
     private static final String TAG = "FragmentItemViewModel";
@@ -30,7 +30,7 @@ public class FragmentItemViewModel extends AndroidViewModel implements Lifecycle
     public final ObservableField<String> fragmentImageUri;
 
 
-    public FragmentItemViewModel(@NonNull @NotNull Application application, NewsRepository repository, String newsTitle) {
+    public ReadArticleViewModel(@NonNull @NotNull Application application, NewsRepository repository, String newsTitle) {
         super(application);
         this.repository = repository;
         this.newsTitle = newsTitle;

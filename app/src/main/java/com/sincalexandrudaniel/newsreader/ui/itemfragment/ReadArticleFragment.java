@@ -13,33 +13,25 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.sincalexandrudaniel.newsreader.databinding.FragmentArticleBinding;
 import com.sincalexandrudaniel.newsreader.models.ViewModelFactory;
-import com.sincalexandrudaniel.newsreader.models.fragment.FragmentItemViewModel;
+import com.sincalexandrudaniel.newsreader.models.fragment.ReadArticleViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ItemFragment extends Fragment {
-    private static final String DEFAULT_NEWS_TITLE = "DEFAULT_NEWS_TITLE";
+public class ReadArticleFragment extends Fragment {
     private static final String TAG = "ItemFragment";
-    private FragmentItemViewModel viewModel;
-    private String newsTitle;
+    private ReadArticleViewModel viewModel;
 
-    public static ItemFragment newInstance() {
-        return new ItemFragment();
+    public static ReadArticleFragment newInstance() {
+        return new ReadArticleFragment();
     }
 
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try {
-            newsTitle = ItemFragmentArgs.fromBundle(getArguments()).getNewsTitle().toString();
-        } catch (Exception e) {
-            Log.e(TAG, "onCreate: ", e);
-            newsTitle = DEFAULT_NEWS_TITLE;
-        } finally {
-            Log.d(TAG, "onCreate: NewsTitle passed as argument: " + newsTitle);
-        }
 
-        viewModel = new ViewModelProvider(this, new ViewModelFactory(requireActivity().getApplication(), newsTitle)).get(FragmentItemViewModel.class);
+        String newsTitle = ReadArticleFragmentArgs.fromBundle(getArguments()).getNewsTitle();
+
+        viewModel = new ViewModelProvider(this, new ViewModelFactory(requireActivity().getApplication(), newsTitle)).get(ReadArticleViewModel.class);
 
         getLifecycle().addObserver(viewModel);
         Log.d(TAG, "ItemFragment viewModel: ");
@@ -50,7 +42,7 @@ public class ItemFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         FragmentArticleBinding binding = FragmentArticleBinding.inflate(inflater, container, false);
-        binding.setFragmentViewModel(viewModel);
+        binding.setViewModel(viewModel);
         return binding.getRoot();
     }
 }

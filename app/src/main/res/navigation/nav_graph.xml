@@ -17,7 +17,7 @@
     <fragment
         tools:layout="@layout/item_news_reader"
         android:id="@+id/itemFragment"
-        android:name="com.sincalexandrudaniel.newsreader.ui.itemfragment.ItemFragment"
+        android:name="com.sincalexandrudaniel.newsreader.ui.itemfragment.ReadArticleFragment"
         android:label="ItemFragment" >
         <argument
             android:name="newsTitle"

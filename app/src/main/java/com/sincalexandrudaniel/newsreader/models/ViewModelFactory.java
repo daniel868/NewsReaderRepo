@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.sincalexandrudaniel.data.NewsRepository;
 import com.sincalexandrudaniel.newsreader.NewsReaderApplication;
-import com.sincalexandrudaniel.newsreader.models.fragment.FragmentItemViewModel;
+import com.sincalexandrudaniel.newsreader.models.fragment.ReadArticleViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -36,14 +36,11 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         if (modelClass.isAssignableFrom(NewsReaderViewModel.class)) {
             Log.d(TAG, "create: " + repository);
             return (T) new NewsReaderViewModel(application, repository);
-        } else if (modelClass.isAssignableFrom(FragmentItemViewModel.class)) {
+        } else if (modelClass.isAssignableFrom(ReadArticleViewModel.class)) {
             Log.d(TAG, "create: " + repository);
-            return (T) new FragmentItemViewModel(application, repository,newsTitle);
+            return (T) new ReadArticleViewModel(application, repository, newsTitle);
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
     }
 
-    public String getNewsTitle() {
-        return newsTitle;
-    }
 }
